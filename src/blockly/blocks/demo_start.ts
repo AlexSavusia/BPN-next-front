@@ -11,10 +11,10 @@ export const DEMO_START = 'demo_start';
 export function registerDemoStartBlock() {
     Blockly.Blocks[DEMO_START] = {
         init() {
-            this.appendDummyInput().appendField('Старт демо-процесса');
+            this.appendDummyInput().appendField('Старт');
             this.setNextStatement(true);
             this.setColour(230);
-            this.setTooltip('Начало выполнения логики демо-процесса (визуально)');
+            this.setTooltip('Начало выполнения логики процесса (визуально)');
         },
     };
 }

@@ -26,7 +26,7 @@ export default function HomePage() {
           <div>
             <h1 className="text-2xl font-semibold">BPM Demo</h1>
             <p className="text-sm text-slate-500">
-              Простая демо-витрина процессов на мок-данных.
+             Витрина
             </p>
           </div>
         </header>

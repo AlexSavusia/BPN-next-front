@@ -21,14 +21,17 @@ export async function registerBlocks(mode: BlocklyMode): Promise<void> {
     // Общие демо-блоки
     registerDemoStartBlock();
     registerDemoOutputBlock();
+    registerDemoMathAdd();
+    registerDemoDictionaryPick();
+
 
     if (mode === 'formula') {
-        registerDemoMathAdd();
+
         // сюда потом добавишь все формульные блоки
     }
 
     if (mode === 'dictionary') {
-        registerDemoDictionaryPick();
+
         // сюда потом добавишь все "справочные" блоки
     }
 }
@@ -37,24 +40,24 @@ export async function registerBlocks(mode: BlocklyMode): Promise<void> {
 export function buildToolbox(mode: BlocklyMode): Blockly.utils.toolbox.ToolboxDefinition {
     const contents: Blockly.utils.toolbox.FlyoutItemInfoArray = [];
 
-    contents.push({ kind: 'label', text: 'ДЕМО' }, { kind: 'sep', gap: 16 });
+    contents.push({ kind: 'label', text: 'Блоки' }, { kind: 'sep', gap: 16 });
 
     // Общие
     contents.push({ kind: 'block', type: DEMO_START });
 
     if (mode === 'dictionary') {
-        contents.push(
-            { kind: 'block', type: DEMO_DICT_PICK },
-            { kind: 'block', type: DEMO_OUTPUT },
-        );
+
     }
 
     if (mode === 'formula') {
-        contents.push(
-            { kind: 'block', type: DEMO_MATH_ADD },
-            { kind: 'block', type: DEMO_OUTPUT },
-        );
+
     }
+
+    contents.push(
+        { kind: 'block', type: DEMO_DICT_PICK },
+        { kind: 'block', type: DEMO_OUTPUT },
+        { kind: 'block', type: DEMO_MATH_ADD },
+    );
 
     return { kind: 'flyoutToolbox', contents };
 }
