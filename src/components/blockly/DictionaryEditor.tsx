@@ -22,6 +22,9 @@ export function DictionaryEditor({ dictionaryId }: DictionaryEditorProps) {
 
                 if (!containerRef.current) return;
 
+                // 🔹 ВАЖНО: очищаем контейнер перед inject
+                containerRef.current.innerHTML = '';
+
                 workspace = Blockly.inject(containerRef.current, {
                     toolbox: buildToolbox('dictionary'),
                     trashcan: true,
@@ -36,11 +39,17 @@ export function DictionaryEditor({ dictionaryId }: DictionaryEditorProps) {
         init();
 
         return () => {
+            // 🔹 Чистим workspace
             if (workspace) {
                 workspace.dispose();
+                workspace = null;
+            }
+            // 🔹 И сам контейнер, чтобы не оставались два набора DOM
+            if (containerRef.current) {
+                containerRef.current.innerHTML = '';
             }
         };
-    }, [dictionaryId]);
+    }, [dictionaryId]); // можно [dictionaryId] или [] — как тебе удобнее
 
     return (
         <div className="rounded-xl border border-slate-200 bg-slate-900 p-4 text-slate-50">

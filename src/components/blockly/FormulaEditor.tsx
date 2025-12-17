@@ -22,6 +22,8 @@ export function FormulaEditor({ formulaId }: FormulaEditorProps) {
 
                 if (!containerRef.current) return;
 
+                containerRef.current.innerHTML = ''; // 👈
+
                 workspace = Blockly.inject(containerRef.current, {
                     toolbox: buildToolbox('formula'),
                     trashcan: true,
@@ -38,9 +40,14 @@ export function FormulaEditor({ formulaId }: FormulaEditorProps) {
         return () => {
             if (workspace) {
                 workspace.dispose();
+                workspace = null;
+            }
+            if (containerRef.current) {
+                containerRef.current.innerHTML = ''; // 👈
             }
         };
     }, [formulaId]);
+
 
     return (
         <div className="rounded-xl border border-slate-200 bg-slate-900 p-4 text-slate-50">
