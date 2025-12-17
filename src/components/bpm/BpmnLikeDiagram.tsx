@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import type { BpmProcess, BpmStep } from '@/lib/bpm/types';
 
 interface Props {
@@ -153,33 +154,6 @@ export function BpmnLikeDiagram({ process }: Props) {
                 </svg>
 
                 {/* Lane’ы (фоновая сетка) */}
-                {laneNames.map((laneName, laneIdx) => {
-                    const y = laneIdx * ROW_HEIGHT;
-
-                    return (
-                        <div
-                            key={laneName}
-                            className="absolute left-0 flex items-center"
-                            style={{
-                                top: y,
-                                height: ROW_HEIGHT,
-                                width: '100%',
-                            }}
-                        >
-                            {/* Подпись lane слева */}
-                            <div className="flex h-full w-40 items-center justify-end pr-2 border-r border-slate-200 bg-slate-50/60">
-                                <div className="text-xs font-medium text-slate-600 text-right">
-                                    {laneName}
-                                </div>
-                            </div>
-
-                            {/* Фоновая линия lane */}
-                            <div className="h-px flex-1 bg-slate-100" />
-                        </div>
-                    );
-                })}
-
-                {/* Ноды (блоки процессов) */}
                 {layoutNodes.map((node) => {
                     const { step, x, y } = node;
 
@@ -187,7 +161,7 @@ export function BpmnLikeDiagram({ process }: Props) {
                         <div
                             key={step.id}
                             className={[
-                                'absolute flex flex-col gap-1 border shadow-sm ',
+                                'absolute flex flex-col gap-1 border shadow-sm px-3 py-2',
                                 getNodeShapeClasses(step),
                             ].join(' ')}
                             style={{
@@ -198,31 +172,55 @@ export function BpmnLikeDiagram({ process }: Props) {
                             }}
                         >
                             <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-                  #{step.order}
-                </span>
+                                <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+                                  #{step.order}
+                                </span>
                                 {step.type && (
                                     <span className="text-[10px] uppercase text-slate-400">
-                    {step.type}
-                  </span>
+                                 {step.type}
+                                </span>
                                 )}
                             </div>
+
                             <div className="text-sm font-medium text-slate-800 truncate">
                                 {step.name}
                             </div>
-                            <div className="flex items-center justify-between mt-1">
-                <span className="text-[10px] text-slate-400 truncate">
-                  {step.assignee}
-                </span>
+
+                            <div className="mt-1 flex items-center justify-between gap-2">
+                                <span className="text-[10px] text-slate-400 truncate">
+                                  {step.assignee}
+                                </span>
                                 <span
                                     className={[
                                         'inline-flex items-center rounded-full px-2 py-[2px] text-[10px] font-medium',
                                         getStepStatusColor(step),
                                     ].join(' ')}
                                 >
-                  {step.status}
-                </span>
+                                  {step.status}
+                                </span>
                             </div>
+
+                            {/* Кнопки перехода к формуле / справочнику, если есть */}
+                            {(step.formulaId || step.dictionaryId) && (
+                                <div className="mt-1 flex items-center gap-2">
+                                    {step.formulaId && (
+                                        <Link
+                                            href={`/formulas/${step.formulaId}`}
+                                            className="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-2 py-[2px] text-[10px] font-medium text-sky-700 hover:bg-sky-100"
+                                        >
+                                            Формула
+                                        </Link>
+                                    )}
+                                    {step.dictionaryId && (
+                                        <Link
+                                            href={`/dictionaries/${step.dictionaryId}`}
+                                            className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2 py-[2px] text-[10px] font-medium text-amber-700 hover:bg-amber-100"
+                                        >
+                                            Справочник
+                                        </Link>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     );
                 })}

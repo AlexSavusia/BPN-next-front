@@ -7,7 +7,13 @@ export interface BpmStep {
     assignee: string;
     status: BpmStepStatus;
     order: number;
-    type?: BpmStepType; // <- опционально
+    type?: BpmStepType;
+
+    /** Опциональная ссылка на формулу в блокли */
+    formulaId?: string;
+
+    /** Опциональная ссылка на справочник в блокли */
+    dictionaryId?: string;
 }
 
 export type BpmProcessStatus = 'draft' | 'active' | 'completed' | 'suspended';

@@ -25,6 +25,8 @@ export const mockProcesses: BpmProcess[] = [
                 status: 'done',
                 order: 2,
                 type: 'task',
+                // ⬇️ тут “подвешена” формула в блокли
+                formulaId: 'employee-onboarding-checklist',
             },
             {
                 id: 'step-3',
@@ -33,6 +35,8 @@ export const mockProcesses: BpmProcess[] = [
                 status: 'in_progress',
                 order: 3,
                 type: 'task',
+                // ⬇️ тут “подвешен” справочник
+                dictionaryId: 'hardware-catalog',
             },
             {
                 id: 'step-4',

@@ -183,6 +183,9 @@ export default async function ProcessPage({ params }: PageProps) {
                             <th className="px-4 py-3 text-left text-xs font-medium text-slate-600">
                                 Статус
                             </th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-slate-600">
+                                Редактор
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -206,6 +209,29 @@ export default async function ProcessPage({ params }: PageProps) {
                    >
   {getStepStatusLabel(step.status)}
 </span>
+                                </td>
+                                <td className="px-4 py-3 text-sm">
+                                    <div className="flex items-center gap-2">
+                                        {step.formulaId && (
+                                            <Link
+                                                href={`/formulas/${step.formulaId}`}
+                                                className="text-xs font-medium text-sky-700 underline underline-offset-2 hover:text-sky-900"
+                                            >
+                                                Формула
+                                            </Link>
+                                        )}
+                                        {step.dictionaryId && (
+                                            <Link
+                                                href={`/dictionaries/${step.dictionaryId}`}
+                                                className="text-xs font-medium text-amber-700 underline underline-offset-2 hover:text-amber-900"
+                                            >
+                                                Справочник
+                                            </Link>
+                                        )}
+                                        {!step.formulaId && !step.dictionaryId && (
+                                            <span className="text-xs text-slate-400">—</span>
+                                        )}
+                                    </div>
                                 </td>
                             </tr>
                         ))}
