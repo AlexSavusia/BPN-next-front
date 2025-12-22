@@ -1,0 +1,50 @@
+/* Пример кастомной темы bpmn-js */
+
+/* Палитра слева */
+.djs-palette {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    background: #c3ddff;
+    width: fit-content;
+}
+
+.djs-palette .entry {
+    border-radius: 10px;
+    margin: 6px;
+    background: #ffffff;
+}
+
+.djs-palette .entry:hover {
+    background: rgba(148, 163, 184, 0.15);
+}
+
+/* Подложка canvas */
+.djs-container .djs-viewport {
+    background: #020617;
+}
+
+.djs-shape .djs-visual > rect,
+.djs-shape .djs-visual > polygon {
+    fill: #020617;
+    stroke: #38bdf8;
+    stroke-width: 2px;
+}
+
+.djs-visual path {
+    stroke-width: 4.25px;
+    stroke: #64748b;
+}
+
+/* Сетки/пики — можно настроить дальше */
+
+
+.bjs-powered-by {
+    display: none !important;
+}
+
+
+.bpmn-icon-task:before {
+    color: #830000;
+}
+

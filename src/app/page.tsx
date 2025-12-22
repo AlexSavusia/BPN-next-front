@@ -29,6 +29,14 @@ export default function HomePage() {
              Витрина
             </p>
           </div>
+          <div>
+            <Link
+                href="/bpmn-editor"
+                className="rounded-lg bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800"
+            >
+              Открыть BPMN редактор
+            </Link>
+          </div>
         </header>
 
         <section className="space-y-4">
